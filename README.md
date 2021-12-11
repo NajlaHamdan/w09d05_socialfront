@@ -3,9 +3,10 @@
 - redux
 - redux-devtools-extension
 ## installing packges
-'''
+```
 npm i react-redux redux redux-devtools-extension
-'''
+
+```
 
 ## functions
 - login 
