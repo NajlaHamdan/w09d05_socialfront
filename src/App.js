@@ -2,19 +2,22 @@ import "./App.css";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
 function App() {
-  const successResponseGoogle = (response) => {
+  const successResponseGoogle = async (response) => {
     console.log(response);
-    const token=response.tokenId;
-    console.log(token);
-     axios.post("http://localhost:4000/googleSignIn",{
+    const token = response.tokenId;
+    // console.log(token);
+    const result = await axios.post("http://localhost:4000/googleSignIn", {
       token,
     });
+    // .then((result) =>
+    console.log(result.data.result.email, "hi this is from backend");
+    // )
+    // .then((err) => console.log(err, "hi this is from backend"));
     // const result = await axios.get("http://localhost:4000/googleSignIn");
-    // console.log(result);
   };
-  const errorResponseGoogle =(response) =>{
+  const errorResponseGoogle = (response) => {
     console.log(response);
-  }
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -30,7 +33,6 @@ function App() {
           onFailure={errorResponseGoogle}
           cookiePolicy={"single_host_origin"}
         />
-        
       </header>
     </div>
   );
