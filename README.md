@@ -3,6 +3,8 @@
 - redux
 - redux-devtools-extension
 - sweetalert2
+- react-google-login
+- axios
 ## installing packges
 ```
 npm i react-redux redux redux-devtools-extension
