@@ -6,6 +6,7 @@
 - react-google-login
 - axios
 - react-router-dom
+- firebase
 ## installing packges
 ```
 npm i react-redux redux redux-devtools-extension
