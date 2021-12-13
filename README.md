@@ -2,6 +2,7 @@
 - react-redux
 - redux
 - redux-devtools-extension
+- sweetalert2
 ## installing packges
 ```
 npm i react-redux redux redux-devtools-extension
