@@ -1,8 +1,10 @@
 import React from "react";
 import axios from "axios";
 import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
 const ForgetPassword = () => {
     let data;
+    const navigate=useNavigate();
   const resetPass = async (e) => {
     e.preventDefault();
     console.log(e.target.email.value);
@@ -15,7 +17,7 @@ const ForgetPassword = () => {
     // navigate(`/confirmAccount/${email}`);
     data=result.data;
     console.log(result.data, "  ", data);
-    if(result==true){
+    if(result.data==true){
         Swal.fire({
             position: 'center',
             icon: 'success',
@@ -23,6 +25,7 @@ const ForgetPassword = () => {
             showConfirmButton: false,
             timer: 1500
           })
+          navigate(`/home`);
     }else{
         Swal.fire({
             title: 'Oops',

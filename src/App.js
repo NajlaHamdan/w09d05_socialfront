@@ -19,7 +19,7 @@ function App() {
           <Route exact path="/home" element={<Home />} />
           {/* <Route exact path="/admin" element={<Admin />} /> */}
         </Routes>
-        {/* <Register /> */}
+        <Home />
       </header>
     </div>
   );
