@@ -25,7 +25,7 @@ const ForgetPassword = () => {
             showConfirmButton: false,
             timer: 1500
           })
-          navigate(`/home`);
+          navigate(`/login`);
     }else{
         Swal.fire({
             title: 'Oops',
