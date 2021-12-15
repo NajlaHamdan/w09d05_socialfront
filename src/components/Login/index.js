@@ -22,7 +22,12 @@ const Login = () => {
     };
     dispatch(signIn(data));
     console.log(result.data.result._id, "  ", result.data.token);
-    navigate("/home");
+    if(result.data.result.role=="61a75918e9839777023d716d"){
+      navigate("/home");
+    }else{
+      navigate("/admin");
+    }
+    
   };
   return (
     <div className="container">

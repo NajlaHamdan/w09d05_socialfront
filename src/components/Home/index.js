@@ -4,6 +4,7 @@ import { storage } from "./../firebase";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Logout from "../Logout";
 const Home = () => {
   const state = useSelector((state) => {
     return state;
@@ -89,6 +90,7 @@ const Home = () => {
   };
   return (
     <div>
+      <Logout/>
       {/* <form onSubmit={uploadfile}> */}
       <input type="file" name="file" onChange={handelChange} />
       <input type="description" onChange={handelText} />

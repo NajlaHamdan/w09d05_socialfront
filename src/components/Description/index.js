@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Logout from "./../Logout"
 import "./style.css";
 const Description = () => {
   const state = useSelector((state) => {
@@ -53,6 +54,7 @@ const Description = () => {
   }
   return (
     <div>
+      <Logout/>
       {/* <form onSubmit={uploadfile}> */}
       {/* <input type="file" name="file" onChange={handelChange} />
       <input type="description" onChange={handelText} />
