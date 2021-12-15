@@ -23,6 +23,7 @@ const Register = () => {
       token,
     });
     console.log(result.data.result.email, "hi this is from backend");
+    navigate('/home');
   };
   const errorResponseGoogle = (response) => {
     console.log(response);
