@@ -18,25 +18,25 @@ const Home = () => {
   const token = state.tokenReducer.token;
   const id = state.tokenReducer.id;
   console.log(id, token);
-  const createPost = async (e) => {
-    // e.preventDefault();
-    // console.log(url);
+  const createPost = async () => {
     const result = await axios.post("http://localhost:4000/createPost", {
       id,
       img,
       desc: "e.target.password.value",
     });
-
     console.log(result, "  ", result.data);
     getPosts();
-    // navigate("/home");
   };
   useEffect(() => {
     getPosts();
   }, []);
   const getPosts = async () => {
     const result = await axios.get(`http://localhost:4000/getPosts/${id}`);
-    setPosts(result.data);
+    if(result.data == "no posts for this user"){
+      setPosts([]);
+    }else{
+      setPosts(result.data);
+    }
     console.log(result.data);
   };
   const uploadfile = (e) => {
@@ -64,22 +64,29 @@ const Home = () => {
       setSrc(e.target.files[0]);
     }
   };
-  const handelText=(e)=>{
+  const handelText = (e) => {
     console.log(e.target);
-  }
-  const toggleLike=async (postId)=>{
+  };
+  const toggleLike = async (postId) => {
     console.log(postId);
-    const like= await axios.post("http://localhost:4000/toggleLike",{
+    const like = await axios.post("http://localhost:4000/toggleLike", {
       id,
-      postId
-    })
-    setLike(like.data)
+      postId,
+    });
+    setLike(like.data);
     console.log(like.data);
-  }
-  const deletePost=async(postId)=>{
-    const deleted= await axios.delete(`http://localhost:4000/deletePost/${id}/${postId}`);
+  };
+  const deletePost = async (postId) => {
+    const deleted = await axios.delete(
+      `http://localhost:4000/deletePost/${id}/${postId}`
+    );
     getPosts();
-  }
+  };
+  const details = async (postId) => {
+    navigate(`/description/${postId}`);
+    const detailes = await axios.get(`http://localhost:4000/getPost/${postId}`);
+    console.log(detailes.data);
+  };
   return (
     <div>
       {/* <form onSubmit={uploadfile}> */}
@@ -89,18 +96,41 @@ const Home = () => {
         Save
       </button>
       {/* </form> */}
-      {posts.length
-        ? posts.map((item) => {
-          return(<div key={item._id}>
-            <p color="white">{item.desc}</p>
-            <img src={"https://firebasestorage.googleapis.com/v0/b/social-3e83c.appspot.com/o/images%2Ffood-photographer-jennifer-pallian-sSnCZlEWN5E-unsplash.jpg?alt=media&token=17e185eb-0906-4d4a-a176-280ad964b5bc"} alt="logo" />
-            <img src={item.img} alt={item.desc} />
-            <button onClick={()=>{toggleLike(item._id)}}>{like?like:"unlike"}</button>
-            <button onClick={()=>{deletePost(item._id)}}>delete</button>
-          </div>);
-            
-          })
-        : "no todos for this user"}
+      <div className="content">
+        <div className="cards">
+          {posts.length
+            ? posts.map((item) => {
+                return (
+                  <div key={item._id}>
+                    <p color="white">{item.desc}</p>
+                    <img src={item.img} alt={item.desc} />
+                    <button
+                      onClick={() => {
+                        toggleLike(item._id);
+                      }}
+                    >
+                      {like ? like : "unlike"}
+                    </button>
+                    <button
+                      onClick={() => {
+                        deletePost(item._id);
+                      }}
+                    >
+                      delete
+                    </button>
+                    <button
+                      onClick={() => {
+                        details(item._id);
+                      }}
+                    >
+                      details
+                    </button>
+                  </div>
+                );
+              })
+            : "no posts for this user"}
+        </div>
+      </div>
     </div>
   );
 };

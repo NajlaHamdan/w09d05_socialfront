@@ -5,6 +5,7 @@ import Confirm from "./components/Confirm";
 import {Routes,Route} from "react-router-dom";
 import ForgetPassword from "./components/ForgetPassword";
 import Home from "./components/Home";
+import Description from "./components/Description";
 function App() {
 
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route exact path="/" element={<Register />} />
           <Route exact path="/forgetPassword" element={<ForgetPassword />} />
           <Route exact path="/home" element={<Home />} />
+          <Route exact path="/description/:postId" element={<Description />} />
+          
           {/* <Route exact path="/admin" element={<Admin />} /> */}
         </Routes>
         <Home />
