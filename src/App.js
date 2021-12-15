@@ -22,7 +22,7 @@ function App() {
           
           {/* <Route exact path="/admin" element={<Admin />} /> */}
         </Routes>
-        <Home />
+        {/* <Home /> */}
       </header>
     </div>
   );
