@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { storage } from "./../firebase";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import Logout from "../Logout";
 const Home = () => {
@@ -23,7 +24,7 @@ const Home = () => {
     const result = await axios.post("http://localhost:4000/createPost", {
       id,
       img,
-      desc: "e.target.password.value",
+      desc: text,
     });
     console.log(result, "  ", result.data);
     getPosts();
@@ -33,22 +34,22 @@ const Home = () => {
   }, []);
   const getPosts = async () => {
     const result = await axios.get(`http://localhost:4000/getPosts/${id}`);
-    if(result.data == "no posts for this user"){
+    if (result.data == "no posts for this user") {
       setPosts([]);
-    }else{
+    } else {
       setPosts(result.data);
     }
     console.log(result.data);
   };
-  const uploadfile = (e) => {
-    e.preventDefault();
+  const uploadfile = () => {
+    // e.preventDefault();
     // const file = e.target.file;
     console.log("img", src);
     const bucket = "images";
     const ref = storage.ref(`/${bucket}/${src.name}`);
     const uploadPost = ref.put(src);
     console.log(src);
-    console.log(e.target.test);
+    // console.log(e.target.test);
     uploadPost.on("state_changed", console.log, console.error, () => {
       ref.getDownloadURL().then((url) => {
         // setFile(null);
@@ -56,7 +57,9 @@ const Home = () => {
         setImg(url);
         // setUrl(url)
         createPost();
-      });
+      }).catch(err=>{
+        console.log(err);
+      })
     });
   };
   const handelChange = (e) => {
@@ -66,7 +69,8 @@ const Home = () => {
     }
   };
   const handelText = (e) => {
-    console.log(e.target);
+    console.log(e.target.text);
+    setText(e.target.text);
   };
   const toggleLike = async (postId) => {
     console.log(postId);
@@ -88,12 +92,53 @@ const Home = () => {
     const detailes = await axios.get(`http://localhost:4000/getPost/${postId}`);
     console.log(detailes.data);
   };
+  const  update=async(postId)=>{
+    Swal.fire({
+      title: 'Submit your post here',
+      input: 'file',
+      inputAttributes: {
+        onChange: {handelChange}
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      showLoaderOnConfirm: true,
+      preConfirm:(login) => {
+        const bucket = "images";
+    const ref = storage.ref(`/${bucket}/${src.name}`);
+    const uploadPost = ref.put(src);
+    console.log(src);
+    // console.log(e.target.test);
+    uploadPost.on("state_changed", console.log, console.error, () => {
+      ref.getDownloadURL().then((url) => {
+        // setFile(null);
+        console.log(url);
+        setImg(url);
+        // setUrl(url)
+        createPost();
+      }).catch(err=>{
+        console.log(err);
+      })
+    });
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: `${result.value.login}'s avatar`,
+          imageUrl: result.value.avatar_url
+        })
+      }
+    })
+    // const updated = await axios.post(`http://localhost:4000/updateById/${postId}`);
+    // console.log(updated.data);
+    // getPosts();
+  }
   return (
     <div>
-      <Logout/>
+      <Logout />
       {/* <form onSubmit={uploadfile}> */}
       <input type="file" name="file" onChange={handelChange} />
-      <input type="description" onChange={handelText} />
+      <input type="text" onChange={handelText} />
       <button type="submit" onClick={uploadfile}>
         Save
       </button>
@@ -126,6 +171,13 @@ const Home = () => {
                       }}
                     >
                       details
+                    </button>
+                    <button
+                      onClick={() => {
+                        update(item._id);
+                      }}
+                    >
+                      update
                     </button>
                   </div>
                 );

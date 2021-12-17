@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { logout } from "./../../reduce/login";
+import { logout } from "./../../reducers/login";
 const Logout = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
