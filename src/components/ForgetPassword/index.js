@@ -1,10 +1,11 @@
 import React from "react";
 import axios from "axios";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import "./style.css";
 const ForgetPassword = () => {
-    let data;
-    const navigate=useNavigate();
+  let data;
+  const navigate = useNavigate();
   const resetPass = async (e) => {
     e.preventDefault();
     console.log(e.target.email.value);
@@ -15,39 +16,42 @@ const ForgetPassword = () => {
     });
     // const email = result.data.email;
     // navigate(`/confirmAccount/${email}`);
-    data=result.data;
+    data = result.data;
     console.log(result.data, "  ", data);
-    if(result.data==true){
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Your account has been confirmed',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          navigate(`/login`);
-    }else{
-        Swal.fire({
-            title: 'Oops',
-            text: "Your password does not reset try it again!",
-            icon: 'warning',
-            showCancelButton: false,
-            confirmButtonColor: 'red',
-            confirmButtonText: 'ok'
-          })
+    if (result.data == true) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your account has been confirmed",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate(`/login`);
+    } else {
+      Swal.fire({
+        title: "Oops",
+        text: "Your password does not reset try it again!",
+        icon: "warning",
+        showCancelButton: false,
+        confirmButtonColor: "red",
+        confirmButtonText: "ok",
+      });
     }
   };
   return (
-    <div>
-      <div className="container">
-        <form onSubmit={resetPass}>
-          {/* <span {data ? className="show":className="hide"}>{data}</span> */}
-          <input type="email" name="email" placeholder="email" />
-          <input type="password" name="password" placeholder="password" />
-          <input type="password" name="confirmPassword" placeholder="confirm password" />
-          <button type="submit">reset</button>
-        </form>
-      </div>
+    <div className="container">
+      <form onSubmit={resetPass}>
+        <span> Reset your password </span>
+        <input type="email" name="email" placeholder="email" />
+        <input type="password" name="password" placeholder="password" />
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder="confirm password"
+        />
+        <button type="submit">reset</button>
+      </form>
+      <button className="backBtn">back</button>
     </div>
   );
 };

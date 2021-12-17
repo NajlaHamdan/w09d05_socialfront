@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 const Register = () => {
-    const navigate=useNavigate();
+  const navigate = useNavigate();
   const register = async (e) => {
     e.preventDefault();
     console.log(e.target.email.value);
@@ -12,7 +12,7 @@ const Register = () => {
       password: e.target.password.value,
       userName: e.target.userName.value,
     });
-    const email=result.data.email
+    const email = result.data.email;
     navigate(`/confirmAccount/${email}`);
     console.log(result.data.email, "  ", result);
   };
@@ -23,7 +23,7 @@ const Register = () => {
       token,
     });
     console.log(result.data.result.email, "hi this is from backend");
-    navigate('/home');
+    navigate("/home");
   };
   const errorResponseGoogle = (response) => {
     console.log(response);
@@ -43,13 +43,15 @@ const Register = () => {
         <button type="submit">sign up</button>
       </form>
       <GoogleLogin
-          clientId="389990397434-ap6i1btg0ubfc79meg74hrt23msjf8ua.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={successResponseGoogle}
-          onFailure={errorResponseGoogle}
-          cookiePolicy={"single_host_origin"}
-        />
-        <span>Already have an account ? <Link to="/login">login</Link></span>
+        clientId="389990397434-ap6i1btg0ubfc79meg74hrt23msjf8ua.apps.googleusercontent.com"
+        buttonText="Login"
+        onSuccess={successResponseGoogle}
+        onFailure={errorResponseGoogle}
+        cookiePolicy={"single_host_origin"}
+      />
+      <span>
+        Already have an account ? <Link to="/login">login</Link>
+      </span>
     </div>
   );
 };

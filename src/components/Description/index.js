@@ -53,9 +53,9 @@ const Description = () => {
     const deleted = await axios.delete(
       `http://localhost:4000/deleteComment/${id}/${commentId}`
     );
-    if(deleted.data == "no comment with this id"){
+    if (deleted.data == "no comment with this id") {
       setComment([]);
-    }else{
+    } else {
       getComments();
     }
   };
@@ -83,7 +83,6 @@ const Description = () => {
         ? posts.map((item) => { */}
       <div key={post._id}>
         <p color="white">{post.desc}</p>
-        <img src={post.img} alt={post.img} />
         <img src={post.img} alt={post.desc} />
         <form on onSubmit={addComment}>
           <input type="text" name="textComment" />

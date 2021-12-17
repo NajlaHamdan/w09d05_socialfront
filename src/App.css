@@ -16,7 +16,7 @@ button {
   padding: 10px 20px 10px 20px;
   text-decoration: none;
 }
-label{
+label {
   padding: 2%;
 }
 button:hover {
@@ -29,16 +29,16 @@ input {
   padding: 6px;
   font-size: 26px;
   border-width: 1px;
-  border-color: #CCCCCC;
-  background-color: #FFFFFF;
+  border-color: #cccccc;
+  background-color: #ffffff;
   color: #443bda;
   border-style: solid;
   border-radius: 0px;
-  box-shadow: 0px 0px 3px rgba(66,66,66,.75);
-  text-shadow: 0px 0px 0px rgba(66,66,66,.75);
+  box-shadow: 0px 0px 3px rgba(66, 66, 66, 0.75);
+  text-shadow: 0px 0px 0px rgba(66, 66, 66, 0.75);
 }
 
-.container{
+.container {
   background-color: #ffffff;
   width: auto;
   height: auto;
@@ -48,7 +48,8 @@ input {
   justify-content: center;
   flex-direction: column;
   box-sizing: border-box;
-  color:black;
+  color: black;
+  position: relative;
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -7,7 +7,7 @@ const Login = () => {
   // const state = useSelector((state) => {
   //   return state;
   // });
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const login = async (e) => {
     e.preventDefault();
@@ -22,12 +22,11 @@ const Login = () => {
     };
     dispatch(signIn(data));
     console.log(result.data.result._id, "  ", result.data.token);
-    if(result.data.result.role=="61a75918e9839777023d716d"){
+    if (result.data.result.role == "61a75918e9839777023d716d") {
       navigate("/home");
-    }else{
+    } else {
       navigate("/admin");
     }
-    
   };
   return (
     <div className="container">
@@ -37,7 +36,9 @@ const Login = () => {
         <input type="password" name="password" placeholder="password" />
         <button type="submit">sign in</button>
       </form>
-      <span>forget password ?<Link to="/forgetPassword">reset</Link></span>
+      <span>
+        forget password ?<Link to="/forgetPassword">reset</Link>
+      </span>
     </div>
   );
 };
