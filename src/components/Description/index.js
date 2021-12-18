@@ -18,14 +18,18 @@ const Description = () => {
     details();
   }, []);
   const details = async () => {
-    const detailes = await axios.get(`http://localhost:4000/getPost/${postId}`);
+    const detailes = await axios.get(`http://localhost:4000/getPost/${postId}`,{
+      headers: { Authorization: `Brearer ${token}` },
+    });
     console.log(detailes.data);
     setPost(detailes.data);
     getComments();
   };
   const getComments = async () => {
     const comments = await axios.get(
-      `http://localhost:4000/getComment/${postId.postId}`
+      `http://localhost:4000/getComment/${postId.postId}`,{
+        headers: { Authorization: `Brearer ${token}` },
+      }
     );
     console.log(comments.data[0].desc);
     console.log(comments);
@@ -45,13 +49,17 @@ const Description = () => {
       id,
       postId: post,
       desc,
+    },{
+      headers: { Authorization: `Brearer ${token}` },
     });
     console.log(detailes);
     getComments();
   };
   const deleteComment = async (commentId) => {
     const deleted = await axios.delete(
-      `http://localhost:4000/deleteComment/${id}/${commentId}`
+      `http://localhost:4000/deleteComment/${id}/${commentId}`,{
+        headers: { Authorization: `Brearer ${token}` },
+      }
     );
     if (deleted.data == "no comment with this id") {
       setComment([]);
@@ -65,6 +73,8 @@ const Description = () => {
       id,
       commentId,
       desc,
+    },{
+      headers: { Authorization: `Brearer ${token}` },
     });
     console.log(updated.data);
     getComments();

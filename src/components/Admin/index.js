@@ -9,7 +9,9 @@ const Admin = () => {
     getCounters();
   }, []);
   const getCounters = async () => {
-    const result = await axios.get("http://localhost:4000/dashboard");
+    const result = await axios.get("http://localhost:4000/dashboard",{
+      headers: { Authorization: `Brearer ${token}` },
+    });
     console.log(result.data);
     setCounters(result.data);
   };

@@ -26,6 +26,8 @@ const Home = () => {
       id,
       img,
       desc: text,
+    },{
+      headers: { Authorization: `Brearer ${token}` },
     });
     console.log(result, "  ", result.data);
     getPosts();
@@ -34,7 +36,9 @@ const Home = () => {
     getPosts();
   }, []);
   const getPosts = async () => {
-    const result = await axios.get(`http://localhost:4000/getPosts/${id}`);
+    const result = await axios.get(`http://localhost:4000/getPosts/${id}`,{
+      headers: { Authorization: `Brearer ${token}` },
+    });
     if (result.data === "no posts for this user") {
       setPosts([]);
     } else {
@@ -79,13 +83,17 @@ const Home = () => {
     const like = await axios.post("http://localhost:4000/toggleLike", {
       id,
       postId,
+    },{
+      headers: { Authorization: `Brearer ${token}` },
     });
     setLike(like.data);
     console.log(like.data);
   };
   const deletePost = async (postId) => {
     const deleted = await axios.delete(
-      `http://localhost:4000/deletePost/${id}/${postId}`
+      `http://localhost:4000/deletePost/${id}/${postId}`,{
+        headers: { Authorization: `Brearer ${token}` },
+      }
     );
     console.log(deleted.data);
     if (deleted.data === "already deleted") {
@@ -96,7 +104,9 @@ const Home = () => {
   };
   const details = async (postId) => {
     navigate(`/description/${postId}`);
-    const detailes = await axios.get(`http://localhost:4000/getPost/${postId}`);
+    const detailes = await axios.get(`http://localhost:4000/getPost/${postId}`,{
+      headers: { Authorization: `Brearer ${token}` },
+    });
     console.log(detailes.data);
   };
   const update = async (postId) => {
