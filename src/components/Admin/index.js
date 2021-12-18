@@ -1,13 +1,19 @@
 import React from "react";
 import Logout from "../Logout";
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import "./style.css";
 const Admin = () => {
+  const state = useSelector((state) => {
+    return state;
+  });
   const [counters, setCounters] = useState("");
   useEffect(() => {
     getCounters();
   }, []);
+  const token = state.tokenReducer.token;
+  const id = state.tokenReducer.id;
   const getCounters = async () => {
     const result = await axios.get("http://localhost:4000/dashboard",{
       headers: { Authorization: `Brearer ${token}` },

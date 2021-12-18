@@ -91,9 +91,14 @@ const Description = () => {
       {/* </form> */}
       {/* {posts.length
         ? posts.map((item) => { */}
+        <div className="App">
+        <header className="App-header"></header>
+        <div className="content">
+          <div className="cards">
       <div key={post._id}>
         <p color="white">{post.desc}</p>
         <img src={post.img} alt={post.desc} />
+        </div></div></div>
         <form on onSubmit={addComment}>
           <input type="text" name="textComment" />
           <button type="submit">add comment</button>
