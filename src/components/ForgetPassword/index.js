@@ -14,11 +14,9 @@ const ForgetPassword = () => {
       password: e.target.password.value,
       confirmPass: e.target.confirmPassword.value,
     });
-    // const email = result.data.email;
-    // navigate(`/confirmAccount/${email}`);
     data = result.data;
     console.log(result.data, "  ", data);
-    if (result.data == true) {
+    if (result.data === true) {
       Swal.fire({
         position: "center",
         icon: "success",

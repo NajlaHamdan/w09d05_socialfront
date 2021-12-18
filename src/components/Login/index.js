@@ -1,12 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { signIn } from "../../reducers/login";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
-  // const state = useSelector((state) => {
-  //   return state;
-  // });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const login = async (e) => {
@@ -21,8 +18,8 @@ const Login = () => {
       token: result.data.token,
     };
     dispatch(signIn(data));
-    console.log(result.data.result._id, "  ", result.data.token);
-    if (result.data.result.role == "61a75918e9839777023d716d") {
+    console.log(result.data.result.role[0], "  ", result.data.token);
+    if (result.data.result.role[0] === "61a75918e9839777023d716d") {
       navigate("/home");
     } else {
       navigate("/admin");

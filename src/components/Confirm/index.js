@@ -7,12 +7,10 @@ const Confirm = () => {
   const email = useParams();
   const checkCode = async (e) => {
     e.preventDefault();
-    // console.log(e.target);
     const result = await axios.post("http://localhost:4000/checkCode", {
       code: e.target.code.value,
       email,
     });
-    // navigate(`/confirmAccount/${result.email}`);
     console.log(result);
     if (result.data) {
       Swal.fire({

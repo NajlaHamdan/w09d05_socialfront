@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { storage } from "./../firebase";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -35,7 +35,7 @@ const Home = () => {
   }, []);
   const getPosts = async () => {
     const result = await axios.get(`http://localhost:4000/getPosts/${id}`);
-    if (result.data == "no posts for this user") {
+    if (result.data === "no posts for this user") {
       setPosts([]);
     } else {
       setPosts(result.data);
@@ -43,14 +43,11 @@ const Home = () => {
     console.log(result.data);
   };
   const uploadfile = () => {
-    // e.preventDefault();
-    // const file = e.target.file;
     console.log("img", src);
     const bucket = "images";
     const ref = storage.ref(`/${bucket}/${src.name}`);
     const uploadPost = ref.put(src);
     console.log(src);
-    // console.log(e.target.test);
     uploadPost.on("state_changed", console.log, console.error, () => {
       ref
         .getDownloadURL()
@@ -117,15 +114,12 @@ const Home = () => {
         const ref = storage.ref(`/${bucket}/${src.name}`);
         const uploadPost = ref.put(src);
         console.log(src);
-        // console.log(e.target.test);
         uploadPost.on("state_changed", console.log, console.error, () => {
           ref
             .getDownloadURL()
             .then((url) => {
-              // setFile(null);
               console.log(url);
               setImg(url);
-              // setUrl(url)
               createPost();
             })
             .catch((err) => {
@@ -149,7 +143,6 @@ const Home = () => {
   return (
     <div>
       <Logout />
-      {/* <form onSubmit={uploadfile}> */}
       <div className="uploadDate">
         <p>Do you have a new post ? upload it here </p>
         <input type="file" name="file" onChange={handelChange} />
@@ -163,7 +156,6 @@ const Home = () => {
           Save
         </button>
       </div>
-      {/* </form> */}
       <div className="App">
         <header className="App-header"></header>
         <div className="content">
