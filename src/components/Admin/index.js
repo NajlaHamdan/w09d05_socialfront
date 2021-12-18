@@ -15,7 +15,7 @@ const Admin = () => {
   const token = state.tokenReducer.token;
   const id = state.tokenReducer.id;
   const getCounters = async () => {
-    const result = await axios.get("http://localhost:4000/dashboard",{
+    const result = await axios.get('http://localhost:4000/dashboard',{
       headers: { Authorization: `Brearer ${token}` },
     });
     console.log(result.data);
